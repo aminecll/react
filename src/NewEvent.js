@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Select from './select'
 
 class NewEvent extends Component {
     createSelectItems() {
@@ -34,12 +35,7 @@ class NewEvent extends Component {
                         
     
                         <div className="md-form">
-                            <div className="mdb-select select-dropdown">
-                            <select>
-                                <option value="web">web</option>
-                                </select>
-                                </div>
-                            <span className="error-msg"></span>
+                            <Select />
                         </div>
     
                         <div className="md-form">
@@ -50,60 +46,51 @@ class NewEvent extends Component {
     
                         <div className="md-form">
                             <label htmlFor="description"></label>
-                            <textarea  name="description" placeholder="titre"></textarea>
+                            <textarea className="form-control md-textarea" name="description" placeholder="Description"></textarea>
                             <span className="error-msg"></span>
                         </div>
     
                         <div className="md-form ">
                             <label htmlFor="dateDebut"></label>
-                            <input type="text" name="dateDebut" placeholder="titre"></input>
+                            <input type="text" name="dateDebut" placeholder="Date de debut"></input>
                             <span className="error-msg"></span>
                         </div>
                         <div className="md-form">
                             <label htmlFor="dateFin"></label>
-                            <input type="text" name="dateFin" placeholder="titre"></input>
+                            <input type="text" name="dateFin" placeholder="Date de fin"></input>
                             <span className="error-msg"></span>
                         </div>
     
                         <div className="md-form">
                             <label htmlFor="prix"></label>
-                            <input type="text" name="prix" placeholder="titre"></input>
+                            <input type="text" name="prix" placeholder="Prix par utilisateur"></input>
                             <span className="error-msg"></span>
                         </div>
                         <div className="md-form">
                             <label htmlFor="nbrMax"></label>
-                            <input type="text" name="nbrMax" placeholder="titre"></input>
+                            <input type="text" name="nbrMax" placeholder="Nombre max des participants"></input>
                             <span className="error-msg"></span>
                         </div>
     
                         <div className="md-form"> 
                             <label htmlFor="adresse"></label>
-                            <input type="text" name="adresse" placeholder="titre"></input>
+                            <input type="text" name="adresse" placeholder="Adresse"></input>
                             <span className="error-msg"></span>
                         </div>
     
                         <div className="md-form"> 
                             <label htmlFor="codeP"></label>
-                            <input type="text" name="codeP" placeholder="titre"></input>
+                            <input type="text" name="codeP" placeholder="Code postal"></input>
                             <span className="error-msg"></span>
                         </div>
                         <div className="md-form"> 
-                        <select name="ville">
-                                <option value="paris">paris</option>
-                            </select>
-                            <span className="error-msg"></span>
+                        <Select />
                         </div>
                         <div className="md-form "> 
-                        <select name="region" className="mdb-select select-dropdown">
-                                <option value="ile de france">ile de france </option>
-                            </select>
-                            <span className="error-msg"></span>
+                       <Select />
                         </div>
                         <div className="md-form"> 
-                        <select name="departement">
-                                <option value="informatique">informatique</option>
-                            </select>
-                            <span className="error-msg"></span>
+                       <Select />
                         </div>
                         <div className="md-form"> 
                             <label htmlFor="images"></label>       

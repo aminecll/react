@@ -1,21 +1,27 @@
 import React, { Component } from 'react';
 import Product from './Product'
 import Slides from'./Slides'
+import Pic from './pic'
 import ProductDescription from './ProductDescription'
 class ProductWrapper extends Component {
     render() {
         return (
+            <div>
+            <link href="https://cdn.rawgit.com/sachinchoolur/lightgallery.js/master/dist/css/lightgallery.css" rel="stylesheet" />
             <div className="row mt-lg-5">
            
             
-                <Slides />
+               <Slides />
                
-               {/* <ProductDescription />
+               <ProductDescription />
                 <div class="col-lg-12">
             <br/><br/>
             <h2>Galerie de photos </h2>
-
-            <ul id="mdb-lightbox-ui" className="list-unstyled row">
+            <div id="mdb-lightbox-ui" className="list-unstyled row">
+                
+            <Pic />
+            
+            {/*<ul id="mdb-lightbox-ui" className="list-unstyled row">
                 
                     <li className="col-xs-6 col-sm-4 col-md-3" data-responsive={"/images/s.jpg"} data-src={"/images/s.jpg"} data-sub-html="<h4>titre</h4>" data-pinterest-text="Pin it1" data-tweet-text="share on twitter 1">
                         <a href="">
@@ -28,9 +34,14 @@ class ProductWrapper extends Component {
                         </a>
                     </li>
                 
-            </ul>
-               </div>*/}
+            </ul>*/}
+        </div>
             </div>
+  
+             </div>
+     
+     </div>
+            
             
 
         );

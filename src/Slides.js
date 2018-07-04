@@ -1,15 +1,16 @@
 import React, { Component , Fragment } from 'react';
-var bgColors = { "Default": "#81b71a"}
+import Img from './img'
+var bgColors = { "Default": "#B579D2"}
 
 class Slides extends Component {
     render() {
         return(
             <Fragment>
                 <div className="col-lg-7 wow fadeIn" data-wow-delay="0.2s">
-            <div id="carousel-example-1z" className="carousel slide carousel-fade" data-ride="carousel">
+            <div id="carousel-example-1z" className="carousel slide carousel-fade " data-ride="carousel">
                
-
-                <ol className="carousel-indicators">
+                <Img />
+               {/* <ol className="carousel-indicators">
                     
                             <li data-target="#carousel-example-1z" data-slide-to="0"></li>
                             <li data-target="#carousel-example-1z" data-slide-to="1"></li>
@@ -46,7 +47,7 @@ class Slides extends Component {
                 <a className="carousel-control-next" href="#carousel-example-1z" role="button" data-slide="next">
                     <span className="carousel-control-next-icon" aria-hidden="true"></span>
                     <span className="sr-only">Next</span>
-                </a>
+        </a>*/}
                
             </div>
             </div>

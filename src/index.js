@@ -1,8 +1,8 @@
 import React from 'react';
 import { render } from 'react-dom';
 import './index.css';
-import ProductWrapper from './ProductWrapper';
+import NewEvent from './NewEvent';
 import registerServiceWorker from './registerServiceWorker';
 
-render(<ProductWrapper />, document.getElementById('root'));
+render(<NewEvent />, document.getElementById('root'));
 registerServiceWorker();
