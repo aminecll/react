@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 import Product from './Product'
 import Slides from'./Slides'
 import Pic from './pic'
+import Map from './Map'
 import ProductDescription from './ProductDescription'
 class ProductWrapper extends Component {
     render() {
         return (
             <div>
-            <link href="https://cdn.rawgit.com/sachinchoolur/lightgallery.js/master/dist/css/lightgallery.css" rel="stylesheet" />
+             
             <div className="row mt-lg-5">
            
             
@@ -39,6 +40,7 @@ class ProductWrapper extends Component {
             </div>
   
              </div>
+             <Map />
      
      </div>
             

@@ -1,8 +1,8 @@
 import React from 'react';
 import { render } from 'react-dom';
 import './index.css';
-import NewEvent from './NewEvent';
+import Test from './test';
 import registerServiceWorker from './registerServiceWorker';
 
-render(<NewEvent />, document.getElementById('root'));
+render(<Test />, document.getElementById('root'));
 registerServiceWorker();

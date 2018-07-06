@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import fb from './fb_01.png';
-import tw from './tw_01.png';
-import gp from './gp_01.png';
+
 class ProductDescription extends Component {
     render() {
         return(

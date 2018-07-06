@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import login from './login-avatar.jpg';
+import Select from './select.js'
+import Terms from './Terms'
+
 
 class Register extends Component {
     render() {
@@ -21,7 +23,7 @@ class Register extends Component {
             <div className="card-body z-depth-3">
 
                 <br></br>
-                <div className="avatar text-center"><img src={login} className="img-circle img-responsive"  height="100" width="100">
+                <div className="avatar text-center"><img src={"/images/avatar.jpg"} className="img-circle img-responsive"  height="100" width="100" />
                 </div>
                 <br></br>
                
@@ -47,7 +49,7 @@ class Register extends Component {
                     <i className="fa fa-envelope prefix grey-text"></i>
                     <label for="email">E-mail</label>
                     <input type="text" name="email" className="email" required></input>
-                    <div className="  alert-danger"> {{ form_errors(form.email) }}</div>
+                    
                 </div>
 
 
@@ -61,7 +63,7 @@ class Register extends Component {
                 <div className="md-form">
                     <i className="fa fa-lock prefix grey-text"></i>
                     <label for="password">Mot de passe</label>
-                    <input type="password" name="plainPassword"  required></input>
+                    <input type="text" name="plainPassword"  required></input>
 
                 </div>
 
@@ -69,16 +71,18 @@ class Register extends Component {
                     <i className="fa fa-lock prefix grey-text"></i>
                     <label for="verification">Répéter le mot de passe</label>
                     <input type="password" name="plainPassword"  required></input>
-        
-                    <br></br>
+            
+                    <br/><br/>
                     
                     <div className="md-form ">
                         <i className="fa fa-calendar prefix grey-text" ></i>
                        <label for="date_naissance">Date de naissance</label>
-                       <input type="date_naissance" name="plainPassword"  required></input>                     
+                       <input type="date" name="plainPassword"  required></input> 
+                       <br/><br/>
+                       </div>                    
                    <div className="md-form"> 
                         <i className="fa fa-photo prefix grey-text"></i>
-                        <label for="password">Photo de profil</label>
+                        <label for="photo">Photo de profil</label>
                         <br></br><br></br>
                         <input type="file" name="photo"  required></input>
                     </div>
@@ -86,22 +90,21 @@ class Register extends Component {
                 </div>
                 <div className="md-form">
                     <i className="fa fa-key prefix grey-text"></i>
-                    <label for="password">Choisissez votre type</label>
+                    <label for="roles">Choisissez votre type</label>
+                    
                     <br></br>
                 </div>
                 <div className="md-form">
-                <input type="select" name="roles"  required></input>
+                <Select />
                 </div>
+    
 
-
-    <div className="form-check">
-    <input type="checkbox" className="form-check-input" id="checkbox_cgu" value="accept_cgu" >
-    <label className="form-check-label" for="checkbox_cgu">J’ai lu et j’accepte les <a href="" data-toggle="modal" data-target="#CguModal">conditions d’utilisation</a></label>
-</div>
+                <Terms />
                 
                 <div className="text-center">
                     <input type="submit" id="_submit" name="_submit" value="Inscription" className="btn btn-primary-inverse btn-md waves-effect waves-light" />
                 </div>
+                
                 </form>
 
                 <div className="text-center">
@@ -110,15 +113,15 @@ class Register extends Component {
                     <h5>Se connecter avec:</h5>
                     <span>
                       
-                        <a href="{{ path('hwi_oauth_service_redirect', {'service': 'facebook' }) }}" type="button" className="btn-floating btn-fb waves-effect waves-light">
+                        <a href="" type="button" className="btn-floating btn-fb waves-effect waves-light">
                             <i className="fa fa-facebook"></i>
                         </a>
                       
-                        <a href="{{ path('hwi_oauth_service_redirect', {'service': 'google' }) }}" type="button" className="btn-floating btn-gplus waves-effect waves-light">
+                        <a href="" type="button" className="btn-floating btn-gplus waves-effect waves-light">
                             <i className="fa fa-google-plus"></i>
                         </a>
                        
-                        <a href="{{ path('hwi_oauth_service_redirect', {'service': 'twitter' }) }}" type="button" className="btn-floating btn-tw waves-effect waves-light">
+                        <a href="" type="button" className="btn-floating btn-tw waves-effect waves-light">
                             <i className="fa fa-twitter"></i>
                         </a>
 
@@ -126,8 +129,8 @@ class Register extends Component {
                     </span>
                 </div>
                 <div className="options text-right">
-                    <hr>
-                    <p>Vous avez déjà un compte ? <a href="{{path ('fos_user_security_login')}}">Connexion</a></p>
+                    <hr />
+                    <p>Vous avez déjà un compte ? <a href="">Connexion</a></p>
                 </div>
 
             </div>

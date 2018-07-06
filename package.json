@@ -3,9 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "axios": "^0.18.0",
+    "google-map-react": "^1.0.5",
+    "next": "^6.1.1",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-dropdown": "^1.5.0",
+    "react-google-maps": "^9.4.5",
     "react-photo-gallery": "6.0.28",
     "react-scripts": "1.1.4",
     "react-slideshow-image": "^0.2.2"
@@ -14,9 +18,13 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "dev": "next"
   },
   "devDependencies": {
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-plugin-prettier": "^2.6.1",
+    "prettier": "1.13.7",
     "react-responsive-select": "^4.1.0"
   }
 }

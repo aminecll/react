@@ -6,7 +6,7 @@ class FooterMenuElement extends Component {
               <ul className="list-unstyled">
                   <li className="ml-0">{this.props.prix} €</li>
                   <li className="ml-5">
-                      <i className="fa fa-clock-o ml-0 pl-0"></i>10/11/2018</li>
+                      <i className="fa fa-clock-o ml-0 pl-0"></i>{this.props.date}</li>
               </ul>
           </div>
            

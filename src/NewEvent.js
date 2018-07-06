@@ -50,14 +50,14 @@ class NewEvent extends Component {
                             <span className="error-msg"></span>
                         </div>
     
-                        <div className="md-form ">
-                            <label htmlFor="dateDebut"></label>
-                            <input type="text" name="dateDebut" placeholder="Date de debut"></input>
+                        <div className="md-form">
+                            <label htmlFor="dateDebut" ></label>
+                            <input type="date" name="dateDebut" placeholder="Date de debut" className="form-control date-deb-fr floating-label "></input>
                             <span className="error-msg"></span>
                         </div>
                         <div className="md-form">
                             <label htmlFor="dateFin"></label>
-                            <input type="text" name="dateFin" placeholder="Date de fin"></input>
+                            <input type="date" name="dateDebut" placeholder="Date de fin" className="form-control date-deb-fr floating-label "></input>
                             <span className="error-msg"></span>
                         </div>
     
