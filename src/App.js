@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
-import Container from './Container';
-import ProductWrapper from './ProductWrapper';
-import Row from './Row';
-import Slides from './Slides';
+import { BrowserRouter as Router , Route } from 'react-router-dom'
+import C from './C';
+import ProductWrapper from './ProductWrapper'
 
-import TitreAcceuil from './TitreAcceuil'
-import Pagination from './Pagination';
+
 class App extends Component {
     render() {
         return(
-       <div>
-                <Container></Container>
-         </div>   
+       <Router>
+           <div>
+            <Route exact path='/' component={C} />
+            <Route exact path='/event' component={ProductWrapper} />
+        </div>
+        </Router>  
 
 
     );

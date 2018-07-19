@@ -8,7 +8,7 @@ class ProductDescription extends Component {
             <br></br>
             <h2> Description </h2>
 
-            descriptionnnn
+            {this.props.desc}
             <br></br>
             <br></br>
    

@@ -2,44 +2,21 @@ import React, { Component } from 'react';
 
 import Gallery from 'react-photo-gallery';
 
-export default class Pic extends React.Component {
+export default class Pic extends Component {
     render() {
+      var tab=[];
+      var i=0;
+for(i=0;i<this.props.images.length;i++){
+  tab.push({
+    src: this.props.images[i], width: 4, height: 3
+  })
+}
     return (
         <div className="col-xs-6 col-sm-4 col-md-12">
-        <Gallery photos={PHOTO_SET} />
+        <Gallery photos={tab} />
         </div>
     );
     }
 }
-const PHOTO_SET = [
-  {
-    src: '/images/2.jpeg',
-    width: 4,
-    height: 3
-  },
-  {
-    src: '/images/1.jpeg',
-    width: 1,
-    height: 1
-  }
-,{
-  src: '/images/3.jpeg',
-    width: 4,
-    height: 3
-  },
-  {
-    src: '/images/4.jpeg',
-    width: 1,
-    height: 1
-  },
-  {
-  src: '/images/1.jpeg',
-    width: 4,
-    height: 3
-  },
-  {
-    src: '/images/3.jpeg',
-    width: 1,
-    height: 1
-  }
-];
+
+

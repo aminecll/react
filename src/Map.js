@@ -14,13 +14,17 @@ const MyMapComponent = compose(
 )((props) =>
   <GoogleMap
     defaultZoom={15}
-    defaultCenter={{ lat: 36.8356839, lng: 10.2367491 }}
+    defaultCenter={{lat: props.l, lng: props.i}}
   >
-    {props.isMarkerShown && <Marker position={{ lat: 36.8356839, lng: 10.2367491 }} onClick={props.onMarkerClick} />}
+    {props.isMarkerShown && <Marker position={{ lat: props.l, lng: props.i }} onClick={props.onMarkerClick} />}
   </GoogleMap>
 )
 
 class Map extends React.PureComponent {
+  
+
+    
+  
   state = {
     isMarkerShown: false,
   }
@@ -41,8 +45,10 @@ class Map extends React.PureComponent {
   }
 
   render() {
+    
     return (
       <MyMapComponent
+        l={this.props.lat} i={this.props.lng}
         isMarkerShown={this.state.isMarkerShown}
         onMarkerClick={this.handleMarkerClick}
       />

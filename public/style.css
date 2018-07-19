@@ -85,7 +85,7 @@ footer.page-footer {
 }
 
 .badge, .navbar.navbar-dark .breadcrumb .nav-item.active>.nav-link:hover, .navbar.navbar-dark .navbar-nav .nav-item.active>.nav-link:hover, .navbar.navbar-dark .navbar-toggler, .navbar.navbar-dark form .form-control, .pagination .active  .page-link:hover {
-    color: #fff !important;
+    color: #222 !important;
 }
 
 .rose{

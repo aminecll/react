@@ -1,38 +1,39 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import MenuElement from "./MenuElement"
 import Row from './Row';
 import events from './sample'
+import { connect } from 'react-redux'
+import { fetchEvents } from './actions/eventAction'
+import { bindActionCreators } from 'redux';
+import { fetchFilter } from './actions/filterAction'
 
 
 import TitreAcceuil from './TitreAcceuil'
 import Pagination from './Pagination';
 class Container extends Component {
-    state = {
-        events : {},
-    };
-    loadevents = () => {
-        this.setState({events : events});
-    }
-    componentDidMount() {
-        this.loadevents();
-      }
-    compnentWillUpdate(){
-        this.loadevents();   
+    componentWillMount(){
+        this.props.fetchEvents()
     }
 
     render() {
         return (
-            <div className="container">
+            <Fragment>
+                
+                <TitreAcceuil></TitreAcceuil>
+                <Row details={this.props.events}></Row>
 
-            <TitreAcceuil></TitreAcceuil>
-                    <Row details={this.state.events}></Row>
-                    
-                    <hr></hr>
+                <hr></hr>
                 <Pagination></Pagination>
 
-        </div>
+            </Fragment>
         );
     }
 }
-
-export default Container;
+const mapStateToProps = state => ({
+    events: state.events.events,
+    
+});
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({ fetchEvents, fetchFilter }, dispatch)
+  }
+export default connect(mapStateToProps, mapDispatchToProps)(Container);;

@@ -1,7 +1,32 @@
 import React, { Component } from 'react';
-import login from './login-avatar.jpg';
+import { connect } from 'react-redux'
+import { fetchLogin } from './actions/loginAction'
+import { bindActionCreators } from 'redux';
+
 
 class Login extends Component {
+    constructor(props) {
+        super(props);
+        this.state = { username: '' ,
+                        password: ''};
+
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    handleChange(event) {
+        this.setState({ [event.target.name] : event.target.value });
+    }
+
+    handleSubmit(event) {
+        event.preventDefault();
+        const userData = this.state;
+        console.log(userData)
+        this.props.fetchLogin(userData);
+        
+
+    }
+
     render() {
         return(
             <div className="row text-left">
@@ -23,28 +48,28 @@ class Login extends Component {
     
     
                         <br></br>
-                        <div className="avatar text-center"><img src={login} className="img-circle img-responsive"  height="100" width="100"></img>
+                        <div className="avatar text-center"><img src="/images/avatar.jpg" className="img-circle img-responsive"  height="100" width="100"></img>
                         </div>
                         <br></br>
                         
                         <h3 className="text-center">Connexion</h3>
                         <br></br>
                         
-                        <form action="" method="post" >
+                        <form onSubmit={this.handleSubmit} >
     
-                            <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
-                            <input type="hidden" name="_target_path" value="{{ app.session.get('referer') }}" />
-    
+                           
+                       
+                            <input type="hidden" name="_csrf_token" value="" />
                             <div className="md-form">
                                 <i className="fa fa-user-circle prefix grey-text"></i>
-                                <input type="text" id="username" name="_username" value="" required="required" />
-                                <label for="username">Nom d'utilisateur</label>
+                                <input type="text" id="username" name="username" value={this.state.username} onChange={this.handleChange} required="required" />
+                                <label htmlFor="username">Nom d'utilisateur</label>
                             </div>
     
                             <div className="md-form">
                                 <i className="fa fa-lock prefix grey-text"></i>
-                                <input type="password" id="password" name="_password" required="required" />
-                                <label for="password">Mot de passe</label>
+                                <input type="password" id="password" name="password"  value={this.state.password} onChange={this.handleChange}required="required" />
+                                <label htmlFor="password">Mot de passe</label>
                             </div>
     
     
@@ -53,7 +78,7 @@ class Login extends Component {
     
                                 <br></br>
                                 <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
-                                <label for="remember_me">Se souvenir de moi</label>
+                                <label htmlFor="remember_me">Se souvenir de moi</label>
     
                             </div>
                         </form>
@@ -107,4 +132,12 @@ class Login extends Component {
 }
 }
 
-export default Login;
+const mapStateToProps = state => ({
+    isAuth: state.userData.isAuth,
+    userData: state.userData.userData
+    
+});
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({ fetchLogin }, dispatch)
+  }
+export default connect(mapStateToProps, mapDispatchToProps)(Login);;

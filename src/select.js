@@ -2,17 +2,31 @@ import React, { Component } from 'react';
 
 
 import Dropdown from 'react-dropdown'
-import 'react-dropdown/style.css'
+import 'react-dropdown/ss.css'
 
-const options = [
-    'one', 'two', 'three'
-  ]
-  const defaultOption = options[0]
+
   class Select extends Component {
+
       render(){
+        const options = [
+            'Simple utilisateur', 'Organisateur'
+           ]
+         var t=[];
+         var i=0
+         if ( this.props.tab !=null && this.props.tab !== options){
+             while (this.props.tab[i] != null){
+                 t.push(this.props.tab[i]);
+                 i++;
+             }
+         
+         } 
+         else{
+             t=options;
+         }
+           const defaultOption = t[0]
           return(
               <div className="mdb-select select-dropdown">
-            <Dropdown  options={options} onChange={this._onSelect} value={defaultOption} placeholder="Select an option" /></div>
+            <Dropdown  options={t} onChange={this._onSelect} value={defaultOption} placeholder="Select an option" /></div>
           )
       }
     }
