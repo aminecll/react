@@ -32,6 +32,7 @@ class Nav extends Component {
 
     handleSubmit(event) {
         event.preventDefault()
+        this.props.history.push('/')
         this.props.fetchRecherche(this.state.value);
     }
 

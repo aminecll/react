@@ -6,6 +6,7 @@ import Map from './Map'
 import ProductDescription from './ProductDescription'
 import { connect } from 'react-redux'
 class ProductWrapper extends Component {
+    
 
     render() {
         

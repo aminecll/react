@@ -4,7 +4,7 @@ import ProfilSide from './ProfilSide';
 import Map from './Map'
 
 
-class ProfileSide extends Component {
+class Profil extends Component {
   
 
   render() {
@@ -23,4 +23,4 @@ class ProfileSide extends Component {
 }
 }
 
-export default ProfileSide;
+export default Profil;

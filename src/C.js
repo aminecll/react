@@ -16,10 +16,14 @@ import Register from './Register'
 
 
 
+
+
 class C extends Component {
 
+    
     render() {
         return (
+            
             <Provider store={store}>
                 <Fragment>
                     <body>
@@ -46,6 +50,7 @@ class C extends Component {
                     <Footer />
                 </Fragment>
             </Provider>
+            
         );
     }
 }

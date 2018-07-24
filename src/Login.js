@@ -22,7 +22,7 @@ class Login extends Component {
         event.preventDefault();
         const userData = this.state;
         console.log(userData)
-        this.props.fetchLogin(userData);
+        this.props.fetchLogin(userData).then(res => console.log(res))
         
 
     }
