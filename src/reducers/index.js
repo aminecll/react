@@ -3,6 +3,10 @@ import eventReducer from './eventReducer'
 import selectReducer from './selectReducer'
 import navReducer from './navReducer'
 import loginReducer from './loginReducer';
+import { authentication } from './authentication.reducer';
+
+
+import { alert } from './alert.reducer';
 
 
 export default combineReducers({
@@ -10,8 +14,11 @@ export default combineReducers({
     e: selectReducer,
     nav: navReducer,
     title: eventReducer,
-    userData: loginReducer,
-    
+   
+    authentication,
+
+
+  alert
     
 
 });

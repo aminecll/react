@@ -2,13 +2,21 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { fetchLogin } from './actions/loginAction'
 import { bindActionCreators } from 'redux';
+import { userActions } from './actions';
 
 
 class Login extends Component {
     constructor(props) {
         super(props);
-        this.state = { username: '' ,
-                        password: ''};
+ 
+        // reset login status
+        this.props.dispatch(userActions.logout());
+ 
+        this.state = {
+            username: '',
+            password: '',
+            submitted: false
+        };
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -18,16 +26,21 @@ class Login extends Component {
         this.setState({ [event.target.name] : event.target.value });
     }
 
-    handleSubmit(event) {
-        event.preventDefault();
-        const userData = this.state;
-        console.log(userData)
-        this.props.fetchLogin(userData).then(res => console.log(res))
-        
-
+    handleSubmit(e) {
+        e.preventDefault();
+ 
+        this.setState({ submitted: true });
+        const { username, password } = this.state;
+        const { dispatch } = this.props;
+        if (username && password) {
+            dispatch(userActions.login(username, password));
+        }
     }
+ 
 
     render() {
+        const { loggingIn } = this.props;
+        const { username, password, submitted } = this.state;
         return(
             <div className="row text-left">
            
@@ -64,12 +77,17 @@ class Login extends Component {
                                 <i className="fa fa-user-circle prefix grey-text"></i>
                                 <input type="text" id="username" name="username" value={this.state.username} onChange={this.handleChange} required="required" />
                                 <label htmlFor="username">Nom d'utilisateur</label>
+                                {submitted && !username &&
+                            <div className="help-block">Username is required</div>
+                        }
                             </div>
     
                             <div className="md-form">
                                 <i className="fa fa-lock prefix grey-text"></i>
                                 <input type="password" id="password" name="password"  value={this.state.password} onChange={this.handleChange}required="required" />
-                                <label htmlFor="password">Mot de passe</label>
+                                <label htmlFor="password">Mot de passe</label> {submitted && !password &&
+                            <div className="help-block">Password is required</div>
+                        }
                             </div>
     
     
@@ -132,12 +150,10 @@ class Login extends Component {
 }
 }
 
-const mapStateToProps = state => ({
-    isAuth: state.userData.isAuth,
-    userData: state.userData.userData
-    
-});
-function mapDispatchToProps(dispatch) {
-    return bindActionCreators({ fetchLogin }, dispatch)
-  }
-export default connect(mapStateToProps, mapDispatchToProps)(Login);;
+function mapStateToProps(state) {
+    const { loggingIn } = state.authentication;
+    return {
+        loggingIn
+    };
+}
+export default connect(mapStateToProps)(Login);;

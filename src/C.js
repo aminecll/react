@@ -1,16 +1,18 @@
 import React, { Component, Fragment } from 'react';
+import {connect } from 'react-redux'
 import Container from './Container';
 import { Provider } from 'react-redux'
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import ProductWrapper from './ProductWrapper';
 import Participe from './Participe';
-import store from './store';
+
 import Nav from './Nav';
 import Footer from './Footer';
 import Tri from './Tri';
 import Login from './Login'
 import Register from './Register'
-
+import { history , store } from './helpers';
+import { alertActions } from './actions';
 
 
 
@@ -19,21 +21,33 @@ import Register from './Register'
 
 
 class C extends Component {
+    constructor(props) {
+        super(props);
+ 
+        const { dispatch } = this.props;
+        history.listen((location, action) => {
+            // clear alert on location change
+            dispatch(alertActions.clear());
+        });
+    }
 
     
     render() {
+        const { alert } = this.props;
         return (
             
-            <Provider store={store}>
+            
                 <Fragment>
                     <body>
-                    <Router>
+                    <Router history={history}>
                         <div>
                         <Nav />
                         <main>
                         <Route exact path="/" component={Tri } />
                             <div className="container">
-                                
+                            {alert.message &&
+                            <div className={`alert ${alert.type}`}>{alert.message}</div>
+                        }
                                     <div>
                                         <Route exact path="/" component={Container } />
                                         <Route exact path="/event/:eventId" component={ProductWrapper} />
@@ -49,11 +63,16 @@ class C extends Component {
                     </body>
                     <Footer />
                 </Fragment>
-            </Provider>
+            
             
         );
     }
 }
+function mapStateToProps(state) {
+    const { alert } = state;
+    return {
+        alert
+    };
+}
 
-
-export default C
+export default connect(mapStateToProps)(C);
