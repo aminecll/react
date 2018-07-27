@@ -5,6 +5,7 @@ import { Provider } from 'react-redux'
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import ProductWrapper from './ProductWrapper';
 import Participe from './Participe';
+import NewEvent from './NewEvent'
 
 import Nav from './Nav';
 import Footer from './Footer';
@@ -21,19 +22,19 @@ import { alertActions } from './actions';
 
 
 class C extends Component {
-    constructor(props) {
-        super(props);
+    // constructor(props) {
+    //     super(props);
  
-        const { dispatch } = this.props;
-        history.listen((location, action) => {
-            // clear alert on location change
-            dispatch(alertActions.clear());
-        });
-    }
+    //     const { dispatch } = this.props;
+    //     history.listen((location, action) => {
+    //         // clear alert on location change
+    //         dispatch(alertActions.clear());
+    //     });
+    // }
 
     
     render() {
-        const { alert } = this.props;
+        // const { alert } = this.props;
         return (
             
             
@@ -45,15 +46,16 @@ class C extends Component {
                         <main>
                         <Route exact path="/" component={Tri } />
                             <div className="container">
-                            {alert.message &&
+                            {/* {alert.message &&
                             <div className={`alert ${alert.type}`}>{alert.message}</div>
-                        }
+                        } */}
                                     <div>
                                         <Route exact path="/" component={Container } />
                                         <Route exact path="/event/:eventId" component={ProductWrapper} />
                                         <Route exact path='/participe/:eventId' component ={Participe} />
                                         <Route exact path='/Connexion' component={Login} />
                                         <Route exact path='/Inscription' component={Register} />
+                                        <Route exact path='/new' component={NewEvent} />
                                     </div>
                                 
                             </div>
@@ -70,7 +72,9 @@ class C extends Component {
 }
 function mapStateToProps(state) {
     const { alert } = state;
+    
     return {
+        user : state.authentication.user,
         alert
     };
 }

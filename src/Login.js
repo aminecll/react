@@ -4,6 +4,8 @@ import { fetchLogin } from './actions/loginAction'
 import { bindActionCreators } from 'redux';
 import { userActions } from './actions';
 
+import { history } from './helpers';
+import { alertActions } from './actions';
 
 class Login extends Component {
     constructor(props) {
@@ -35,11 +37,19 @@ class Login extends Component {
         if (username && password) {
             dispatch(userActions.login(username, password));
         }
+       
+        history.listen((location, action) => {
+            // clear alert on location change
+            dispatch(alertActions.clear());
+        });
+    
     }
  
+    
 
     render() {
-        const { loggingIn } = this.props;
+        const { loggingIn , alert } = this.props;
+        
         const { username, password, submitted } = this.state;
         return(
             <div className="row text-left">
@@ -55,6 +65,9 @@ class Login extends Component {
     
                 <div className="card">
                     <div className="card-body z-depth-3">
+                    {alert.message &&
+                            <div className={`alert ${alert.type}`}>{alert.message}</div>
+                        }
                         
                             {/*<div className="error-msg alert alert-danger" role="alert">{{ error.messageKey|trans(error.messageData, 'security') }}    </div> */}
                         
@@ -69,7 +82,7 @@ class Login extends Component {
                         <br></br>
                         
                         <form onSubmit={this.handleSubmit} >
-    
+                    
                            
                        
                             <input type="hidden" name="_csrf_token" value="" />
@@ -152,8 +165,9 @@ class Login extends Component {
 
 function mapStateToProps(state) {
     const { loggingIn } = state.authentication;
+    const { alert } = state;
     return {
-        loggingIn
+        loggingIn, alert
     };
 }
 export default connect(mapStateToProps)(Login);;

@@ -14,9 +14,12 @@ import Dropdown, {
 import './button.css';
 import './dropdown.css';
 import { bindActionCreators } from 'redux';
+import { userActions } from './actions';
+import { alertActions } from './actions';
 
 import Select from './select'
 var bgColors = { "Default": "white" }
+
 class Nav extends Component {
     constructor(props) {
         super(props);
@@ -34,6 +37,24 @@ class Nav extends Component {
         event.preventDefault()
         this.props.history.push('/')
         this.props.fetchRecherche(this.state.value);
+    }
+    handleClick(e) {
+
+
+
+        const { dispatch, history } = this.props;
+
+        dispatch(userActions.logout());
+
+
+        history.listen((location, action) => {
+            // clear alert on location change
+            dispatch(alertActions.clear());
+
+        });
+
+
+
     }
 
 
@@ -73,6 +94,18 @@ class Nav extends Component {
                                 <li className="nav-item">
                                     <a className="nav-link" href="#">Contacts</a>
                                 </li>
+                                {localStorage.getItem('user') ? this.props.user.roles=="ROLE_ORGANIZER"? (<li className="nav-item btn-group">
+                                <DropdownButton 
+                                        btnSize="lg"
+                                        title="Mes ateliers"
+                                        
+                                    >
+                                         <MenuItem onSelect={() =>{this.handleSelect("new")}}>Nouvel atelier</MenuItem>
+                                         <MenuItem>Liste des ateliers</MenuItem>
+                                         
+                                        
+                                    </DropdownButton>
+                                        </li>) :null :null }
 
 
                             </ul>
@@ -86,10 +119,10 @@ class Nav extends Component {
                                             <i className="fa fa-search"></i>
                                         </Dropdown.Toggle>
                                         <Dropdown.Menu>
-                                            <form className="form-inline"  onSubmit={this.handleSubmit}>
+                                            <form className="form-inline" onSubmit={this.handleSubmit}>
                                                 <div className="text-center">
                                                     <input className="form-control" type="text" placeholder="Recherche" name="motcle" aria-label="Recherche" value={this.state.value} onChange={this.handleChange} />
-                                                    
+
                                                     <input type="submit" className="btn btn-sm btn-secondary" value="Rechercher" />
                                                 </div>
                                             </form>
@@ -97,28 +130,49 @@ class Nav extends Component {
                                         </Dropdown.Menu>
                                     </Dropdown>
                                 </li>
-                                <li className="nav-item btn-group">
 
-                                    <Dropdown >
-                                        <Dropdown.Toggle
-                                            btnStyle="flat"
 
-                                        >
-                                            <i className="fa fa-user"></i>
-                                        </Dropdown.Toggle>
-                                        <Dropdown.Menu>
-                                            <MenuItem onSelect={() => { this.handleSelect('Connexion') }}>
-                                                Connexion
+                                {localStorage.getItem('user') ? (<div>
+                                    <li className="nav-item" style={{ paddingRight: ".5rem", paddingLeft: ".5rem", paddingTop: ".5rem" }}>
+                                        <span style={{ color: bgColors.Default }}> Bienvenu  </span>
+                                    </li>
+                                    <li className="nav-item" style={{ paddingRight: ".5rem", paddingLeft: ".5rem", paddingTop: ".5rem" }}>
+                                        <a href="{{ path('fos_user_profile_show') }}" title="Mon Profile" style={{ color: bgColors.Default }}>{this.props.user.first_name} |</a>
+                                    </li>
+
+                                    <li className="nav-item" style={{ paddingRight: ".5rem", paddingLeft: ".5rem", paddingTop: ".5rem" }}>
+                                        <a href="" onClick={() => { this.handleClick() }} title="Déconnexion" style={{ color: bgColors.Default }}>
+                                            <i className="fa fa-power-off"></i>
+                                        </a>
+                                    </li>
+                                </div>
+                                ) :
+
+                                    (
+                                        <li className="nav-item btn-group">
+                                            <Dropdown >
+                                                <Dropdown.Toggle
+                                                    btnStyle="flat"
+
+                                                >
+                                                    <i className="fa fa-user"></i>
+
+                                                </Dropdown.Toggle>
+                                                <Dropdown.Menu>
+                                                    <MenuItem onSelect={() => { this.handleSelect('Connexion') }}>
+                                                        Connexion
         </MenuItem>
-                                            <MenuItem onSelect={() => { this.handleSelect('Inscription') }}>
-                                                Inscription
+                                                    <MenuItem onSelect={() => { this.handleSelect('Inscription') }}>
+                                                        Inscription
         </MenuItem>
-                                        </Dropdown.Menu>
-                                    </Dropdown>
+                                                </Dropdown.Menu>
+                                            </Dropdown>
+                                        </li>)
+
+                                }
 
 
 
-                                </li>
                             </ul>
 
                         </div>
@@ -130,10 +184,11 @@ class Nav extends Component {
     }
 };
 const mapStateToProps = state => ({
-    nav: state.nav.nav
+    nav: state.nav.nav,
+    user: state.authentication.user
 });
 
-  
-  
+
+
 
 export default withRouter(connect(mapStateToProps, { fetchNav, fetchRecherche })(Nav));;

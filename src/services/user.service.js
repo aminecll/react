@@ -21,6 +21,7 @@ function login(username, password) {
             if (user.token) {
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
                 localStorage.setItem('user', JSON.stringify(user));
+                history.push('/')
             }
 
             return user;
@@ -41,8 +42,10 @@ function handleResponse(response) {
                 logout();
                 history.push("/Connexion");
             }
+            
  
             const error = (data && data.message) || response.statusText;
+            
             return Promise.reject(error);
         }
  

@@ -10,7 +10,7 @@ export function alert(state = {}, action) {
     case alertConstants.ERROR:
       return {
         type: 'alert-danger',
-        message: action.message
+        message: "verifier votre login out mot de passe"
       };
     case alertConstants.CLEAR:
       return {};
