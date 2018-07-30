@@ -101,7 +101,7 @@ class Nav extends Component {
                                         
                                     >
                                          <MenuItem onSelect={() =>{this.handleSelect("new")}}>Nouvel atelier</MenuItem>
-                                         <MenuItem>Liste des ateliers</MenuItem>
+                                         <MenuItem onSelect={() =>{this.handleSelect("list")}}>Liste des ateliers</MenuItem>
                                          
                                         
                                     </DropdownButton>
@@ -137,7 +137,7 @@ class Nav extends Component {
                                         <span style={{ color: bgColors.Default }}> Bienvenu  </span>
                                     </li>
                                     <li className="nav-item" style={{ paddingRight: ".5rem", paddingLeft: ".5rem", paddingTop: ".5rem" }}>
-                                        <a href="{{ path('fos_user_profile_show') }}" title="Mon Profile" style={{ color: bgColors.Default }}>{this.props.user.first_name} |</a>
+                                        <a onClick={() => { this.props.history.push('/Profil') }} title="Mon Profile" style={{ color: bgColors.Default }}>{this.props.user.first_name} |</a>
                                     </li>
 
                                     <li className="nav-item" style={{ paddingRight: ".5rem", paddingLeft: ".5rem", paddingTop: ".5rem" }}>

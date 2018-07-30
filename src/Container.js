@@ -16,7 +16,7 @@ import Pagination from './Pagination';
 
 const Loading = require('react-loading-animation');
 class Container extends Component {
-    s
+    
     componentWillMount() {
         this.props.fetchEvents()
     }

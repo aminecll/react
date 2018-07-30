@@ -6,6 +6,8 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import ProductWrapper from './ProductWrapper';
 import Participe from './Participe';
 import NewEvent from './NewEvent'
+import Profil from './Profil'
+import ListEvent from './ListEvent'
 
 import Nav from './Nav';
 import Footer from './Footer';
@@ -56,6 +58,9 @@ class C extends Component {
                                         <Route exact path='/Connexion' component={Login} />
                                         <Route exact path='/Inscription' component={Register} />
                                         <Route exact path='/new' component={NewEvent} />
+                                        <Route exact path='/list' component={ListEvent} />
+                                        {localStorage.getItem('user') ? 
+                                        <Route exact path='/Profil' component={Profil} /> : null }
                                     </div>
                                 
                             </div>

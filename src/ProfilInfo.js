@@ -1,4 +1,5 @@
 import React, { Component , Fragment } from 'react';
+import {connect} from 'react-redux'
 
 
 class ProfilInfo extends Component {
@@ -21,8 +22,8 @@ class ProfilInfo extends Component {
             <div className="col-lg-1"></div>
             <div className="col-lg-8">
             <div className="fos_user_user_show">
-                <p>username</p>
-                <p>email</p>
+                <p>Nom d'utilisateur : {this.props.user.username} </p>
+                <p>Email : {this.props.user.email}</p>
             </div>
 
 
@@ -34,4 +35,8 @@ class ProfilInfo extends Component {
 }
 }
 
-export default ProfilInfo;
+const mapStateToProps = state => ({
+ 
+    user: state.authentication.user
+});
+export default connect(mapStateToProps)(ProfilInfo)

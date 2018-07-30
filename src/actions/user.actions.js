@@ -15,11 +15,12 @@ function login(username, password) {
  
         userService.login(username, password)
             .then(
-                user => { 
+                user => {
                     dispatch(success(user));
+                    history.push('/Profil')
                     
-                    
-                },
+                }
+                ,
                 error => {
                     dispatch(failure(error.toString()));
                     dispatch(alertActions.error(error.toString()));
@@ -34,7 +35,7 @@ function login(username, password) {
  
 function logout() {
     userService.logout();
-    history.push('/')
+    history.push('/Connexion')
     return { type: userConstants.LOGOUT };
 }
  

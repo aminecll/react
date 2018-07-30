@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { fetchLogin } from './actions/loginAction'
 import { bindActionCreators } from 'redux';
 import { userActions } from './actions';
+import {withRouter} from 'react-router-dom'
 
 import { history } from './helpers';
 import { alertActions } from './actions';
@@ -170,4 +171,4 @@ function mapStateToProps(state) {
         loggingIn, alert
     };
 }
-export default connect(mapStateToProps)(Login);;
+export default  withRouter(connect(mapStateToProps)(Login));;
