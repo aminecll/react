@@ -1,4 +1,4 @@
-import { FETCH_EVENTS , FETCH_FILTER, FETCH_TRI_MOINS_CHER, FETCH_TRI_PLUS_CHER, FETCH_TRI_PLUS_AVANCÉ, FETCH_TRI_PLUS_PROCHE, FETCH_RECHERCHE } from '../actions/types'  
+import { FETCH_EVENTS , FETCH_ALLEVENTS, FETCH_FILTER, FETCH_TRI_MOINS_CHER, FETCH_TRI_PLUS_CHER, FETCH_TRI_PLUS_AVANCÉ, FETCH_TRI_PLUS_PROCHE, FETCH_RECHERCHE } from '../actions/types'  
 
 const initialState ={
     events :[],
@@ -52,7 +52,7 @@ export default function(state= initialState, action) {
                 events:action.payload,
                 title: action.title
             }
-
+            
         default:
             return state;
     }

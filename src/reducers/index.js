@@ -7,6 +7,7 @@ import { authentication } from './authentication.reducer';
 
 
 import { alert } from './alert.reducer';
+import allEventsReducer from './allEventsReducer';
 
 
 export default combineReducers({
@@ -14,6 +15,7 @@ export default combineReducers({
     e: selectReducer,
     nav: navReducer,
     title: eventReducer,
+    allevents: allEventsReducer,
    
     authentication,
 

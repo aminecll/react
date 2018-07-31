@@ -17,8 +17,9 @@ function login(username, password) {
             .then(
                 user => {
                     dispatch(success(user));
-                    history.push('/Profil')
                     
+                   
+                    history.replace('/')
                 }
                 ,
                 error => {

@@ -1,5 +1,11 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom';
+import Pagination from "react-js-pagination";
+import { bindActionCreators } from 'redux';
+import { selectEvent } from './actions/selectEvent'
+import { fetchAllEvents } from './actions/allEventsAction'
+require('./style.css')
 
 var bgColors = {
     "Default": "orange",
@@ -7,32 +13,64 @@ var bgColors = {
     "Danger": "red"
 }
 var tab = []
+const itemPerPage = 6
 
 class ListEvent extends Component {
     state = {
-        t: {}
+        t: {},
+        paginatedArray: [],
+        currentPage: 1
+    }
+    clickHandler = (el) => {
+        const { selectEvent, history } = this.props
+        const { paginatedArray } = this.state
+        selectEvent(el)
+        history.push('/event/' + el.id)
     }
 
-    componentDidMount() {
 
-        console.log(this.props.user.first_name + ' ' + this.props.user.Last_name)
+    handlePageChange = currentPage => {
+        const firstIndex = (currentPage - 1) * itemPerPage
+        const lastIndex = firstIndex + itemPerPage
 
-        {
-            localStorage.getItem('user') ? this.props.user.roles == "ROLE_ORGANIZER" ? (
-                Object.keys(this.props.events).map(el => this.props.events[el].organizer == (this.props.user.first_name + ' ' + this.props.user.Last_name) ? tab.push(this.props.events[el]) : null)) :
-                Object.keys(this.props.events).map(el => tab.push(this.props.events[el]))
-                : null
+        this.setState({
+            currentPage,
+            paginatedArray: this.state.t.slice(firstIndex, lastIndex)
+        })
+    }
+
+    componentWillMount() {
+        this.props.fetchAllEvents()
+    }
+
+    componentWillReceiveProps = nextProps => {
+
+
+        if (nextProps.allevents !== this.props.allevents) {
+            {
+                localStorage.getItem('user') ? this.props.user.roles == "ROLE_ORGANIZER" ? (
+                    Object.keys(nextProps.allevents).map(el => nextProps.allevents[el].organizer == (nextProps.user.first_name + ' ' + nextProps.user.Last_name) ? tab.push(nextProps.allevents[el]) : null)) :
+                    Object.keys(nextProps.allevents).map(el => tab.push(nextProps.allevents[el]))
+                    : null
+            }
+            this.setState({
+                t: tab,
+                paginatedArray: tab.slice(0, itemPerPage)
+            })
+            console.log(this.state.t)
         }
-        this.setState({ t: tab })
     }
 
     render() {
+
+        const { paginatedArray, t, currentPage } = this.state
+        const { user } = this.props
 
         return (
 
 
             <Fragment>
-                {console.log(tab)}
+
                 <div className="row">
                     <div className="col-lg-2"></div>
 
@@ -47,7 +85,6 @@ class ListEvent extends Component {
                             <table className="table ">
                                 <thead>
                                     <tr>
-
                                         <th>
                                             Atelier
                             </th>
@@ -64,31 +101,38 @@ class ListEvent extends Component {
 
                                 </thead>
                                 <tbody >
-                                    {Object.keys(this.state.t).map(el =>
+                                    {(paginatedArray.map((el, key) =>
                                         <tr>
-                                            <td><a href="#">{this.state.t[el].titre}</a></td>
-                                            <td>{this.state.t[el].category}</td>
-                                            {this.state.t[el].validation == 0 ?
-                                            <div>
-                                            <td><p style={{ color: bgColors.Default }}>En Cours</p></td>
-                                            <td> <a className="btn btn-success btn-sm" href="#"> Modifier </a></td> </div> :
-                                            this.state.t[el].validation == 1 ?
-                                            <div>
-                                            <td> <p style={{color:bgColors.Primary}}>Validé</p></td>
-                           <td>                           </td>
-                           </div>
-                           : 
-                           <div>
-                           <td> <p style={{color: bgColors.Danger}}>Refusé</p></td>
-                           <td>                           </td>
-                           </div>
+                                            <td><a onClick={() => this.clickHandler(paginatedArray[key])}>{paginatedArray[key].titre}</a></td>
+                                            <td>{paginatedArray[key].category}</td>
+                                            {paginatedArray[key].validation == 0 && user.roles == 'ROLE_ORGANIZER' ?
+                                                <div>
+                                                    <td><p style={{ color: bgColors.Default }}>En Cours</p></td>
+
+                                                    <td> <a className="btn btn-success btn-sm" > Modifier </a></td> </div> :
+                                                paginatedArray[key].validation == 0 && user.roles == 'ROLE_ADMIN' ?
+                                                    <div>
+                                                        <td><p style={{ color: bgColors.Default }}>En Cours</p></td>
+
+                                                        <td> <a className="btn btn-success btn-sm" onClick={() => this.clickHandler(paginatedArray[key])}> Consulter </a></td> </div> :
+                                                    paginatedArray[key].validation == 1 ?
+                                                        <div>
+                                                            <td> <p style={{ color: bgColors.Primary }}>Validé</p></td>
+                                                            <td>                           </td>
+                                                        </div>
+                                                        :
+                                                        <div>
+                                                            <td> <p style={{ color: bgColors.Danger }}>Refusé</p></td>
+                                                            <td>                           </td>
+                                                        </div>
                                             }
                                         </tr>
-                                    )}
+                                    ))}
 
                                 </tbody>
 
                             </table>
+
                         </div>
 
 
@@ -100,9 +144,25 @@ class ListEvent extends Component {
 
 
                 </div>
+                <nav className="row flex-center wow fadeIn" data-wow-delay="0.2s">
+                    <div className="navigation">
+                        <Pagination
+                            activePage={currentPage}
+                            itemsCountPerPage={itemPerPage}
+                            totalItemsCount={t.length}
+                            onChange={this.handlePageChange}
+                            innerClass="pagination"
+                            activeLinkClass="page-link active"
+                            linkClass="page-link"
+                            itemClass="page-item "
+                            activeClass="page-item active"
+
+                        />
+                    </div>
+                </nav>
                 <br />
                 <br />
-            </Fragment>
+            </Fragment >
 
         );
     }
@@ -111,9 +171,14 @@ class ListEvent extends Component {
 const mapStateToProps = state => ({
 
     user: state.authentication.user,
-    events: state.events.events
+    allevents: state.allevents.allevents,
+    e: state.e.e
 
 });
 
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({ selectEvent, fetchAllEvents }, dispatch)
+}
 
-export default connect(mapStateToProps)(ListEvent);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ListEvent));
+

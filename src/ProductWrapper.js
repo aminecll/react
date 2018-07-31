@@ -5,11 +5,14 @@ import Pic from './pic'
 import Map from './Map'
 import ProductDescription from './ProductDescription'
 import { connect } from 'react-redux'
+import InvalidEvent from './InvalidEvent'
+import ValidEvent from './ValidEvent'
+import AdminDec from './AdminDec';
 class ProductWrapper extends Component {
-    
+
 
     render() {
-        
+
         return (
             <Fragment>
 
@@ -24,12 +27,24 @@ class ProductWrapper extends Component {
                         <h2>Galerie de photos </h2>
                         <div id="mdb-lightbox-ui" className="list-unstyled row">
 
-                            <Pic images={this.props.e.images}/>
+                            <Pic images={this.props.e.images} />
 
-                           
+
                         </div>
                     </div>
+                    <br />
+                    <div className="col-lg-12">
+                        {localStorage.getItem('user') && this.props.user.roles == "ROLE_ADMIN" ?
+                            <h2>Décision de l'administrateur </h2> : null
 
+                        }
+                        {localStorage.getItem('user') && this.props.user.roles == "ROLE_ADMIN" && this.props.e.validation === 0 ?
+                            <AdminDec />
+                            : localStorage.getItem('user') && this.props.user.roles == "ROLE_ADMIN"  && this.props.e.validation === 1 ? <ValidEvent /> :localStorage.getItem('user') && this.props.user.roles == "ROLE_ADMIN"  &&  this.props.e.validation === 2 ? <InvalidEvent /> : null
+
+                        }
+
+                    </div>
                 </div>
                 <br />
                 <hr />
@@ -45,6 +60,7 @@ class ProductWrapper extends Component {
 }
 
 const mapStateToProps = state => ({
-    e: state.e.e
+    e: state.e.e,
+    user: state.authentication.user
 });
 export default connect(mapStateToProps)(ProductWrapper);
