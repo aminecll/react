@@ -1,9 +1,62 @@
 import React, { Component } from 'react';
-import Select from './select.js'
-import Terms from './Terms'
 
+import Dropdown from 'react-dropdown'
+import 'react-dropdown/ss.css'
+import Terms from './Terms'
+import { connect } from 'react-redux';
+ 
+import { userActions } from './actions';
+const options = [
+    'Simple utilisateur', 'Organisateur'
+] 
+const title = "choisir votre role"
 
 class Register extends Component {
+    constructor(props) {
+        super(props);
+ 
+        this.state = {
+            user: {
+                first_name: '',
+                last_name: '',
+                email: '',
+                username:'',
+                password: '',
+                plainPassword:'',
+                date_naissance:'',
+                roles:'Organisateur'
+            },
+            submitted: false
+        };
+ 
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+ 
+    handleChange(event) {
+        const { name, value } = event.target;
+        const { user } = this.state;
+        this.setState({
+            user: {
+                ...user,
+                [name]: value
+            }
+        });
+    }
+    
+ 
+    handleSubmit(event) {
+        event.preventDefault();
+ 
+        this.setState({ submitted: true });
+        const { user } = this.state;
+        const { dispatch } = this.props;
+        console.log(user)
+        if (user.first_name && user.last_name && user.username && user.password && user.plainPassword && user.date_naissance && user.photo && user.roles) {
+            // dispatch(userActions.register(user));
+            console.log(user)
+        }
+    }
     render() {
         return(
             <div className="row text-left">
@@ -30,73 +83,68 @@ class Register extends Component {
 
                 <h3 className="text-center">Register</h3>
                 <br></br>
-                <form>
+                <form onSubmit={this.handleSubmit}>
 
                 <div className="md-form">
                     <i className="fa fa-user-circle prefix grey-text"></i>
-                    <label  for="username" >Prénom</label>
-                    <input type="text" name="username" className="username" required></input>
+                    <label  htmlFor="username" >Prénom</label>
+                    <input type="text" name="first_name" className="username" required onChange={this.handleChange}></input>
                     
                 </div>
                 <div className="md-form">
                     <i className="fa fa-user-circle prefix grey-text"></i>
-                    <label  for="username" >Nom</label>
-                    <input type="text" name="last_name" className="last_name" required></input>
+                    <label  htmlFor="username" >Nom</label>
+                    <input type="text" name="last_name" className="last_name" required onChange={this.handleChange}></input>
                   
                 </div>
 
                 <div className="md-form">
                     <i className="fa fa-envelope prefix grey-text"></i>
-                    <label for="email">E-mail</label>
-                    <input type="text" name="email" className="email" required></input>
+                    <label htmlFor="email">E-mail</label>
+                    <input type="text" name="email" className="email" required onChange={this.handleChange}></input>
                     
                 </div>
 
 
                 <div className="md-form">
                     <i className="fa fa-user-circle prefix grey-text"></i>
-                    <label  for="username" >Username</label>
-                    <input type="text" name="email" className="email" required></input>
+                    <label  htmlFor="username" >Username</label>
+                    <input type="text" name="username" className="email" required onChange={this.handleChange}></input>
 
                 </div>
 
                 <div className="md-form">
                     <i className="fa fa-lock prefix grey-text"></i>
-                    <label for="password">Mot de passe</label>
-                    <input type="text" name="plainPassword"  required></input>
+                    <label htmlFor="password">Mot de passe</label>
+                    <input type="password" name="password"  required onChange={this.handleChange}></input>
 
                 </div>
 
                 <div className="md-form">
                     <i className="fa fa-lock prefix grey-text"></i>
-                    <label for="verification">Répéter le mot de passe</label>
-                    <input type="password" name="plainPassword"  required></input>
+                    <label htmlFor="verification">Répéter le mot de passe</label>
+                    <input type="password" name="plainPassword"  required onChange={this.handleChange}></input>
             
                     <br/><br/>
-                    
+                    </div>
+   
                     <div className="md-form ">
                         <i className="fa fa-calendar prefix grey-text" ></i>
-                       <label for="date_naissance">Date de naissance</label>
-                       <input type="date" name="plainPassword"  required></input> 
+                       <label htmlFor="date_naissance">Date de naissance</label>
+                       <input type="date" name="date_naissance"  required onChange={this.handleChange}></input> 
                        <br/><br/>
                        </div>                    
-                   <div className="md-form"> 
-                        <i className="fa fa-photo prefix grey-text"></i>
-                        <label for="photo">Photo de profil</label>
-                        <br></br><br></br>
-                        <input type="file" name="photo"  required></input>
-                    </div>
+                   
 
-                </div>
+                
                 <div className="md-form">
                     <i className="fa fa-key prefix grey-text"></i>
-                    <label for="roles">Choisissez votre type</label>
                     
+                    <div className="mdb-select select-dropdown">
+                <Dropdown options={options}  placeholder={title} onChange={this.handleChange1} /></div>
                     <br></br>
                 </div>
-                <div className="md-form">
-                <Select />
-                </div>
+               
     
 
                 <Terms />
