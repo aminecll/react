@@ -5,7 +5,7 @@ var bgColors = { "Default": "#B579D2"}
 class Slides extends Component {
     participe = () => {
         
-        this.props.history.push('Atelier_react/participe/' + this.props.detail.id)
+        this.props.history.push('/participe/' + this.props.detail.id)
       }
     
     render() {

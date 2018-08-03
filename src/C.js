@@ -42,25 +42,25 @@ class C extends Component {
             
                 <Fragment>
                     <body>
-                    <Router history={history}>
+                    <Router history={history}  basename={'/Atelier_react'}>
                         <div>
                         <Nav />
                         <main>
-                        <Route exact path="/" component={Tri } />
+                        <Route exact path={`${process.env.PUBLIC_URL}/`} component={Tri } />
                             <div className="container">
                             {/* {alert.message &&
                             <div className={`alert ${alert.type}`}>{alert.message}</div>
                         } */}
                                     <div>
-                                        <Route exact path="Atelier_react/" component={Container } />
-                                        <Route exact path="Atelier_react/event/:eventId" component={ProductWrapper} />
-                                        <Route exact path='Atelier_react/participe/:eventId' component ={Participe} />
-                                        <Route exact path='Atelier_react/Connexion' component={Login} />
-                                        <Route exact path='Atelier_react/Inscription' component={Register} />
-                                        <Route exact path='Atelier_react/new' component={NewEvent} />
-                                        <Route exact path='Atelier_react/list' component={ListEvent} />
+                                        <Route exact path={`${process.env.PUBLIC_URL}/`} component={Container } />
+                                        <Route exact path={`${process.env.PUBLIC_URL}/event/:eventId`} component={ProductWrapper} />
+                                        <Route exact path={`${process.env.PUBLIC_URL}/participe/:eventId`} component ={Participe} />
+                                        <Route exact path={`${process.env.PUBLIC_URL}/Connexion`} component={Login} />
+                                        <Route exact path={`${process.env.PUBLIC_URL}/Inscription`} component={Register} />
+                                        <Route exact path={`${process.env.PUBLIC_URL}/new`} component={NewEvent} />
+                                        <Route exact path={`${process.env.PUBLIC_URL}/list`} component={ListEvent} />
                                         {localStorage.getItem('user') ? 
-                                        <Route exact path='Atelier_react/Profil' component={Profil} /> : null }
+                                        <Route exact path={`${process.env.PUBLIC_URL}/Profil`} component={Profil} /> : null }
                                     </div>
                                 
                             </div>

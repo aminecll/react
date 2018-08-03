@@ -15,7 +15,7 @@ class MenuElement extends Component {
   clickHandler = () => {
     const { selectEvent, detail, history } = this.props
     selectEvent(detail)
-    history.push('Atelier_react/event/' + detail.id)
+    history.push('/event/' + detail.id)
   }
 
 

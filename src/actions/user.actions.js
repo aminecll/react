@@ -20,7 +20,7 @@ function login(username, password) {
                     dispatch(success(user));
 
 
-                    history.push('Atelier_react/')
+                    history.push('/')
                 }
                 ,
                 error => {
@@ -49,7 +49,7 @@ function register(user) {
             .then(
                 user => {
                     dispatch(success());
-                    history.push('Atelier_react/login');
+                    history.push('/login');
                     dispatch(alertActions.success('Registration successful'));
                 },
                 error => {
