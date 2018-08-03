@@ -35,7 +35,7 @@ class Nav extends Component {
 
     handleSubmit(event) {
         event.preventDefault()
-        this.props.history.push('/')
+        this.props.history.push('Atelier_react/')
         this.props.fetchRecherche(this.state.value);
     }
     handleClick(e) {
@@ -62,7 +62,7 @@ class Nav extends Component {
         this.props.fetchNav();
     }
     handleSelect = (e) => {
-        this.props.history.push('/' + e)
+        this.props.history.push('Atelier_react/' + e)
     };
 
     render() {
@@ -73,7 +73,7 @@ class Nav extends Component {
 
                 <nav className="navbar navbar-expand-lg navbar-inverse navbar-dark">
                     <div className="container">
-                        <a className="navbar-brand" href="" onClick={() => { this.props.history.push('/') }}>L ' Atelier</a>
+                        <a className="navbar-brand" href="" onClick={() => { this.props.history.push('Atelier_react/') }}>L ' Atelier</a>
                         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                             <span className="navbar-toggler-icon"></span>
                         </button>

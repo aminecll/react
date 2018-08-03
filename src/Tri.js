@@ -17,7 +17,7 @@ import { TriPlusAvancé } from './actions/TriPlusAvancé'
 
 class Tri extends Component {
     handleClick() {
-        this.props.history.push("/list")
+        this.props.history.push("Atelier_react/list")
     }
 
     render() {

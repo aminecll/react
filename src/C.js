@@ -52,15 +52,15 @@ class C extends Component {
                             <div className={`alert ${alert.type}`}>{alert.message}</div>
                         } */}
                                     <div>
-                                        <Route exact path="/" component={Container } />
-                                        <Route exact path="/event/:eventId" component={ProductWrapper} />
-                                        <Route exact path='/participe/:eventId' component ={Participe} />
-                                        <Route exact path='/Connexion' component={Login} />
-                                        <Route exact path='/Inscription' component={Register} />
-                                        <Route exact path='/new' component={NewEvent} />
-                                        <Route exact path='/list' component={ListEvent} />
+                                        <Route exact path="Atelier_react/" component={Container } />
+                                        <Route exact path="Atelier_react/event/:eventId" component={ProductWrapper} />
+                                        <Route exact path='Atelier_react/participe/:eventId' component ={Participe} />
+                                        <Route exact path='Atelier_react/Connexion' component={Login} />
+                                        <Route exact path='Atelier_react/Inscription' component={Register} />
+                                        <Route exact path='Atelier_react/new' component={NewEvent} />
+                                        <Route exact path='Atelier_react/list' component={ListEvent} />
                                         {localStorage.getItem('user') ? 
-                                        <Route exact path='/Profil' component={Profil} /> : null }
+                                        <Route exact path='Atelier_react/Profil' component={Profil} /> : null }
                                     </div>
                                 
                             </div>
